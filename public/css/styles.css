@@ -1,6 +1,130 @@
 /******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+/* Mobile-first styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #fff;
+  color: #222;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 0.5rem;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  background: #222;
+}
+
+nav ul li a {
+  color: white;
+  padding: 0.75rem;
+  display: block;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background: #444;
+}
+
+.main-content {
+  padding: 1rem;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-text h2 {
+  color: #0077aa;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #009de0;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.reviews-upgrades {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviews, .upgrades {
+  margin-top: 2rem;
+}
+
+.upgrades .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.upgrades img {
+  max-width: 100%;
+  height: auto;
+  background: #00bfe0;
+  padding: 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #f1f1f1;
+  font-size: 0.9rem;
+}
+
+/* --- Responsive for larger screens --- */
+@media screen and (min-width: 768px) {
+  nav ul {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-text {
+    max-width: 50%;
+  }
+
+  .reviews-upgrades {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .reviews, .upgrades {
+    width: 48%;
+  }
+
+  .upgrades .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

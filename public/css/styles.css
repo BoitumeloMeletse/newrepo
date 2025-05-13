@@ -1,130 +1,267 @@
-/******* Change Box Model ***************/
-/* Mobile-first styling */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset and Base Styles */
+* {
   margin: 0;
-  background: #fff;
-  color: #222;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.site-wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  border: 10px solid transparent;
+  border-image: repeating-linear-gradient(45deg, #000, #000 10px, #fff 10px, #fff 20px) 10;
+}
+
+/* Typography */
+h1 {
+  font-size: 3rem;
+  color: #fff;
+  background:
+  url('https://i.pinimg.com/originals/bd/35/7e/bd357e3e61f3b424f237d332462193a1.gif') center; 
+  background-size: cover;
+  background-clip: text;
+  color: transparent;
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  to{
+    background-position-x: -200px
+  }
+}
+
+h2 {
+  font-size: 3rem;
+  color: #fff;
+  background:
+  url('https://www.icegif.com/wp-content/uploads/2022/05/icegif-507.gif') center; 
+  background-size: cover;
+  background-clip: text;
+  color: transparent;
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  to{
+    background-position-x: -200px
+  }
+}
+
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+/* Header Styles */
 header {
-  background-color: #333;
-  color: white;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
-.top-bar {
+.header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #222;
+}
+
+.account a {
+  font-size: 0.9rem;
+}
+
+/* Navigation */
+nav {
+  background-color: #222;
+  padding: 0.5rem 0;
 }
 
 nav ul {
   display: flex;
-  flex-direction: column;
-  padding: 0;
-  list-style: none;
-  margin: 0;
-  background: #222;
+  justify-content: flex-start;
 }
 
-nav ul li a {
+nav li {
+  margin-right: 0.5rem;
+}
+
+nav a {
   color: white;
-  padding: 0.75rem;
+  padding: 0.5rem 1rem;
   display: block;
-  text-decoration: none;
 }
 
-nav ul li a:hover {
-  background: #444;
+nav a.active, nav a:hover {
+  background-color: #444;
 }
 
-.main-content {
+/* Main Content */
+main {
   padding: 1rem;
 }
 
-.hero img {
+main > h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero-img {
   width: 100%;
-  max-width: 300px;
+  height: auto;
 }
 
 .hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero-text h2 {
-  color: #0077aa;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #009de0;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.reviews-upgrades {
-  display: flex;
-  flex-direction: column;
-}
-
-.reviews, .upgrades {
-  margin-top: 2rem;
-}
-
-.upgrades .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  text-align: center;
-}
-
-.upgrades img {
-  max-width: 100%;
-  height: auto;
-  background: #00bfe0;
+  position: absolute;
+  top: 0;
+  left: 0;
   padding: 1rem;
+  z-index: 1;
 }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #f1f1f1;
+.car-name {
+  color: #00b8d4;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.car-features {
+  margin-bottom: 1rem;
+}
+
+.car-features li {
+  color: #00b8d4;
   font-size: 0.9rem;
 }
 
-/* --- Responsive for larger screens --- */
+.btn-own {
+  display: inline-block;
+  background-color: #00b8d4;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Reviews Section */
+.reviews {
+  margin-bottom: 2rem;
+}
+
+.reviews h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.reviews ul li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Upgrades Section */
+.upgrades h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.upgrade-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.upgrade-img-container {
+  background-color: #00b8d4;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.upgrade-img-container img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+}
+
+/* Media Query for Larger Screens */
 @media screen and (min-width: 768px) {
-  nav ul {
-    flex-direction: row;
-    justify-content: space-around;
+  .site-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .hero-content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .logo h1 {
+    font-size: 2rem;
   }
 
-  .hero-text {
-    max-width: 50%;
+  main > h1 {
+    font-size: 2rem;
   }
 
-  .reviews-upgrades {
-    flex-direction: row;
-    justify-content: space-between;
+  .content-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
   }
 
   .reviews, .upgrades {
-    width: 48%;
+    flex: 1;
   }
 
-  .upgrades .grid {
+  .car-name {
+    font-size: 1.5rem;
+  }
+
+  .car-features li {
+    font-size: 1rem;
+  }
+
+  .hero-content {
+    width: 40%;
+  }
+
+  .upgrade-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }

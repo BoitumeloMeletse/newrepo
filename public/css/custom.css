@@ -124,97 +124,69 @@ main > h1 {
   margin-bottom: 1rem;
 }
 
-/* Hero Section */
-.hero {
-  position: relative;
-  margin-bottom: 2rem;
-}
-
-.hero-img {
-  width: 100%;
-  height: auto;
-}
-
-.hero-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 1rem;
-  z-index: 1;
-}
-
-.car-name {
-  color: #00b8d4;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.car-features {
-  margin-bottom: 1rem;
-}
-
-.car-features li {
-  color: #00b8d4;
-  font-size: 0.9rem;
-}
-
-.btn-own {
-  display: inline-block;
-  background-color: #00b8d4;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-/* Reviews Section */
-.reviews {
-  margin-bottom: 2rem;
-}
-
-.reviews h2 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-
-.reviews ul li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* Upgrades Section */
-.upgrades h2 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-
-.upgrade-grid {
+/* Vehicle Grid */
+.vehicle-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusts to fit screen size */
+  gap: 20px; /* Space between cards */
+  margin: 20px auto; /* Center the grid */
+  padding: 10px;
+  max-width: 1200px; /* Limit the grid width */
 }
 
-.upgrade-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Vehicle Card */
+.vehicle-card {
+  border: 1px solid #ddd; /* Light border for a clean look */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Prevent content overflow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  background-color: #fff; /* White background for contrast */
   text-align: center;
 }
 
-.upgrade-img-container {
-  background-color: #00b8d4;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem;
+.vehicle-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
-.upgrade-img-container img {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
+/* Vehicle Card Image */
+.vehicle-card img {
+  width: 100%; /* Full width of the card */
+  height: 200px; /* Fixed height for uniformity */
+  object-fit: cover; /* Ensures the image fits within the dimensions without distortion */
+  border-bottom: 1px solid #ddd; /* Separate image from content */
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.vehicle-card img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Vehicle Card Title */
+.vehicle-card h2 {
+  font-size: 1.5rem; /* Adjust font size */
+  margin: 10px 0;
+  color: #333; /* Dark text for readability */
+}
+
+.vehicle-card h2 a {
+  text-decoration: none; /* Remove underline */
+  color: #007bff; /* Blue color for links */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.vehicle-card h2 a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Vehicle Card Price */
+.vehicle-card p {
+  font-size: 1.2rem; /* Slightly larger font for price */
+  font-weight: bold; /* Emphasize the price */
+  color: #28a745; /* Green color for price */
+  margin: 10px 0;
 }
 
 /* Footer */

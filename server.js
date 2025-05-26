@@ -11,7 +11,6 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const router = express.Router()
 
 /* ***********************
  * View Engine and Templates
@@ -24,55 +23,14 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(static)
-
-// Index Route
 app.get("/", baseController.buildHome)
 
-// custom Route
-app.get("/custom", (req, res) => {
-  res.render("custom", { title: "Custom" })
-})
+// Inventory routes
+app.use("/inv", inventoryRoute)
 
-// SUV Route
-app.get('/suv', (req, res) => {
-  res.render('suv', { title: 'SUV' });
-});
-
-// Truck Route
-app.get('/truck', (req, res) => {
-  res.render('truck', { title: 'Truck' });
-});
-
-// Sedan Route
-app.get('/sedan', (req, res) => {
-  res.render('sedan', { title: 'Sedan' });
-});
-
-// Sport Route
-app.get('/sport', (req, res) => {
-  res.render('sport', { title: 'Sport' });
-});
-
-
-
-// Intentional error route
-router.get("/error", (req, res, next) => {
-  res.render('error', { title: 'Error' });
-  const error = new Error("Intentional Server Error")
-  error.status = 500
-  next(error)
-})
-
-module.exports = router
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(err.status || 500)
-  res.render("error", {
-    title: "Error",
-    message: err.message || "Internal Server Error",
-  })
+// Index Route
+app.get("/", function(req, res){
+  res.render("index", { title: "Home" })
 })
 
 /* ***********************

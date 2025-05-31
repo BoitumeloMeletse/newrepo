@@ -11,21 +11,20 @@
   <div class="site-wrapper">
     <%- include('./partials/header') %>
   
-    <main>
-      <h1>SUV Vehicles</h1>
-      <div class="vehicle-grid">
-        <div class="vehicle-card">
-          <img src="/images/jeep-wrangler.jpg" alt="Jeep Wrangler">
-          <h2><a href="#">Jeep Wrangler</a></h2>
-          <p>$25,000</p>
-        </div>
-        <div class="vehicle-card">
-          <img src="/images/tesla-model-x.jpg" alt="Tesla Model X">
-          <h2><a href="#">Tesla Model X</a></h2>
-          <p>$417,650</p>
-        </div>
-      </div>
-    </main>
+    <%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main>
+  <h1><%= title %></h1>
+  <nav>
+    <%- nav %>
+  </nav>
+  <section>
+    <%- grid %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
    </div>
 </body>
 </html>

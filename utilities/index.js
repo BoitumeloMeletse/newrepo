@@ -5,16 +5,6 @@ const Util = {}
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function (req, res, next) {
-  
-  /* ***************************
-   *  Get all classification data
-   * ************************** */
-  async function getClassifications(){
-    return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
-  } 
-  
-  console.log(data)
-
   let data = await invModel.getClassifications()
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
@@ -33,8 +23,6 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>"
   return list
 }
-
-module.exports = Util
 
 
 
@@ -73,3 +61,6 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+module.exports = Util
+

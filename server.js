@@ -11,6 +11,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+const utilities = require("./utilities/")
 const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 
@@ -31,6 +32,38 @@ app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
 
 
+// 404 Error Handler - must be after all other routes
+app.use((req, res, next) => {
+  const error = new Error(`Page not found: ${req.originalUrl}`)
+  error.status = 404
+  next(error)
+})
+
+/* ***********************
+ * Global Error Handling Middleware (Task 2)
+ *************************/
+app.use(async (err, req, res, next) => {
+  console.error("Error occurred:", err.stack)
+
+  let nav = ""
+  try {
+    nav = await utilities.getNav()
+  } catch (navError) {
+    console.error("Error getting navigation:", navError)
+    nav = "<ul><li><a href='/'>Home</a></li></ul>"
+  }
+
+  const status = err.status || 500
+  const message = err.message || "Something went wrong. Please try again later."
+
+  res.status(status).render("errors/error", {
+    title: `Error ${status}`,
+    nav: nav,
+    message: message,
+    status: status,
+    layout: "./layouts/layout",
+  })
+})
 
 /* ***********************
  * Local Server Information

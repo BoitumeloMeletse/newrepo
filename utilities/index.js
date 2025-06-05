@@ -131,9 +131,27 @@ Util.buildVehicleDetailHTML = (vehicle) => {
   `
 }
 
+
 /* ************************
  * Error handling wrapper (Task 2)
  ************************** */
 Util.handleErrors = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+/* ****************************************
+*  Deliver login view
+* *************************************** */
+async function buildLogin(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/login", {
+    title: "Login",
+    nav,
+  })
+}
+
+module.exports = { buildLogin }
+
+
+
 
 module.exports = Util

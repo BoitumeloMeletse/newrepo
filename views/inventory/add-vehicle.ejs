@@ -1,18 +1,23 @@
 
     <main>
       <h1>Add New Vehicle</h1>
-      
-      <% if (messages) { %>
-        <p class="notice"><%= messages %></p>
-      <% } %>
-      
-      <% if (errors) { %>
-        <ul class="notice">
-          <% errors.forEach(error => { %>
-            <li><%= error.msg %></li>
-          <% }) %>
-        </ul>
-      <% } %>
+      <!-- Display title -->
+<% if (title) { %>
+  <h1 class="page-title"><%= title %></h1>
+  <% } %>
+  
+  <!-- Display view message -->
+  <%- messages() %>
+  
+  <!-- Display server-side validation errors -->
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  
       
       <div class="form-container">
         <form action="/inv/add-vehicle" method="post">

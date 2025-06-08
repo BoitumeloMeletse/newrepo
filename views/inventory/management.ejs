@@ -1,18 +1,29 @@
+<!-- Display title -->
 <% if (title) { %>
-  <h1><%= title %></h1>
-  <% } else {
-    res.redirect('/')
-  } %>
+  <h1 class="page-title"><%= title %></h1>
+  <% } %>
   
-  <%-messages() %>
+  <!-- Display view message -->
+  <%- messages() %>
   
-  <a class="vehicle-manage-link" href="/inv/add-classification">Add New Classification</a>
-  <a class="vehicle-manage-link" href="/inv/add-vehicle">Add New Vehicle</a>
+  <!-- Display server-side validation errors -->
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
   
+  <!-- Management Links -->
+  <ul class="management-links">
+    <li><a href="/inv/add-classification" title="New vehicle classification">Add New Classification</a></li>
+    <li><a href="/inv/add-vehicle" title="Add a new vehicle">Add New Vehicle</a></li>
+  </ul>
   
   <h2>Manage Inventory</h2>
   <p>Choose a classification to see those inventory items.</p>
-
+  <%- classificationList %>
   
   <table id="inventoryDisplay"></table>
   

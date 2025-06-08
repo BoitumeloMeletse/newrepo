@@ -1,16 +1,18 @@
 <div class="cse-container">
   <div class="register-wrapper">
-    <h1 class="page-title">Register</h1>
+    <h1 class="page-title"><%= title %></h1>
     
     <!-- Flash Messages -->
     <%- messages() %>
-
+    
     <% if (errors) { %>
-      <ul class="notice">
-     <% errors.array().forEach(error => { %>
-       <li><%= error.msg %></li>
-    <%  }) %>
-     </ul>
+      <div class="error-messages">
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
     <% } %>
     
     <div class="register-form-container">
@@ -23,6 +25,7 @@
             name="account_firstname" 
             required
             placeholder="Enter your first name"
+            value="<%= locals.account_firstname || '' %>"
           >
         </div>
         
@@ -34,6 +37,7 @@
             name="account_lastname" 
             required
             placeholder="Enter your last name"
+            value="<%= locals.account_lastname || '' %>"
           >
         </div>
         
@@ -44,20 +48,26 @@
             id="account_email" 
             name="account_email" 
             required
-            placeholder="Enter a valid email address"
+            placeholder="Enter your email address"
+            value="<%= locals.account_email || '' %>"
           >
         </div>
         
         <div class="form-group">
           <label for="account_password">Password:</label>
-          <input 
-            type="password" 
-            id="account_password" 
-            name="account_password" 
-            required
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
-            placeholder="Enter your password"
-          >
+          <div class="password-container">
+            <input 
+              type="password" 
+              id="account_password" 
+              name="account_password" 
+              required
+              placeholder="Enter your password"
+              minlength="12"
+            >
+            <button type="button" class="password-toggle" onclick="togglePassword()">
+              <span id="toggle-text">Show</span>
+            </button>
+          </div>
           <div class="password-requirements">
             <p>Password must contain:</p>
             <ul>
@@ -81,6 +91,55 @@
   </div>
 </div>
 
+<script>
+function togglePassword() {
+  const passwordInput = document.getElementById('account_password');
+  const toggleText = document.getElementById('toggle-text');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleText.textContent = 'Hide';
+  } else {
+    passwordInput.type = 'password';
+    toggleText.textContent = 'Show';
+  }
+}
+
+// Client-side password validation
+document.getElementById('account_password').addEventListener('input', function(e) {
+  const password = e.target.value;
+  const requirements = document.querySelectorAll('.password-requirements li');
+  
+  // Check length
+  if (password.length >= 12) {
+    requirements[0].style.color = 'green';
+  } else {
+    requirements[0].style.color = '#6c757d';
+  }
+  
+  // Check uppercase
+  if (/[A-Z]/.test(password)) {
+    requirements[1].style.color = 'green';
+  } else {
+    requirements[1].style.color = '#6c757d';
+  }
+  
+  // Check number
+  if (/\d/.test(password)) {
+    requirements[2].style.color = 'green';
+  } else {
+    requirements[2].style.color = '#6c757d';
+  }
+  
+  // Check special character
+  if (/[@$!%*?&]/.test(password)) {
+    requirements[3].style.color = 'green';
+  } else {
+    requirements[3].style.color = '#6c757d';
+  }
+});
+</script>
+
 <style>
 /* CSE Motors Registration Page Styling */
 .register-wrapper {
@@ -96,6 +155,24 @@
   margin-bottom: 30px;
   text-align: center;
   font-weight: bold;
+}
+
+.error-messages {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-messages li {
+  margin-bottom: 5px;
 }
 
 .register-form-container {
@@ -128,6 +205,7 @@
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  background: white;
 }
 
 .form-group input:focus {
@@ -136,18 +214,36 @@
   box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
 }
 
-/* Validation styling */
-.form-group input:required:invalid {
-  border-left: 4px solid #dc3545;
+.form-group input:required {
+  border-left: 4px solid #00bcd4;
 }
 
-.form-group input:required:valid {
-  border-left: 4px solid #28a745;
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.form-group input:focus:invalid {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+.password-container input {
+  flex: 1;
+  padding-right: 80px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: #00bcd4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.password-toggle:hover {
+  background: #00acc1;
 }
 
 .password-requirements {
@@ -173,6 +269,7 @@
   color: #6c757d;
   font-size: 0.9rem;
   margin-bottom: 5px;
+  transition: color 0.3s ease;
 }
 
 .form-actions {
@@ -181,7 +278,7 @@
 }
 
 .btn-register {
-  background: linear-gradient(135deg, #00bcd4, #00acc1);
+  background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
   border: none;
   padding: 15px 40px;
@@ -190,12 +287,18 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .btn-register:hover {
-  background: linear-gradient(135deg, #00acc1, #00838f);
+  background: linear-gradient(135deg, #218838, #1e7e34);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-register:active {
+  transform: translateY(0);
 }
 
 .login-link {
@@ -218,6 +321,7 @@
 
 .login-link a:hover {
   text-decoration: underline;
+  color: #00acc1;
 }
 
 /* Responsive Design */
@@ -244,8 +348,18 @@
     padding: 10px 12px;
   }
   
+  .password-container input {
+    padding-right: 70px;
+  }
+  
+  .password-toggle {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
   .btn-register {
     width: 100%;
+    max-width: none;
   }
 }
 </style>

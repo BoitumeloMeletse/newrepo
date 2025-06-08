@@ -1,0 +1,38 @@
+<h1><%- title %></h1>
+
+<p>Classification names must not contain spaces or special characters.</p>
+
+<%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<form
+  action="/inv/add-classification"
+  method="post"
+  id="addClassificationForm"
+  novalidate
+>
+  <h4><i>FIELD IS REQUIRED</i></h4>
+  <fieldset>
+    <label for="classification_name"
+      >Classification Name:
+      <div class="input-info">
+        <i>NAME MUST BE ALPHABETIC CHARACTERS ONLY.</i>
+      </div>
+      <input
+        type="text"
+        id="classification_name"
+        name="classification_name"
+        pattern="^[A-Za-z0-9]+$"
+        title="No spaces or special characters allowed"    
+        required
+        value="<%- locals.classification_name %>"
+      />
+    </label>
+    <button type="submit" class="button">Add Classification</button>
+  </fieldset>
+</form>

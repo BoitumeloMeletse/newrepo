@@ -1,6 +1,6 @@
 <div class="cse-container">
   <div class="login-wrapper">
-    <h1 class="page-title">Login</h1>
+    <h1 class="page-title"><%= title %></h1>
     
     <!-- Flash Messages -->
     <%- messages() %>
@@ -25,18 +25,8 @@
             id="account_password" 
             name="account_password" 
             required
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
             placeholder="Enter your password"
           >
-          <div class="password-requirements">
-            <p>Password must contain:</p>
-            <ul>
-              <li>At least 12 characters</li>
-              <li>At least 1 capital letter</li>
-              <li>At least 1 number</li>
-              <li>At least 1 special character (@$!%*?&)</li>
-            </ul>
-          </div>
         </div>
         
         <div class="form-actions">
@@ -53,6 +43,21 @@
 
 <style>
 /* CSE Motors Login Page Styling */
+.cse-container {
+  background: white;
+  border: 8px solid;
+  border-image: repeating-linear-gradient(
+    45deg,
+    #000 0px,
+    #000 10px,
+    #fff 10px,
+    #fff 20px
+  ) 8;
+  min-height: 80vh;
+  margin: 20px;
+  position: relative;
+}
+
 .login-wrapper {
   padding: 40px;
   background: white;
@@ -98,6 +103,7 @@
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  background: white;
 }
 
 .form-group input:focus {
@@ -106,43 +112,8 @@
   box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
 }
 
-/* Validation styling */
-.form-group input:required:invalid {
-  border-left: 4px solid #dc3545;
-}
-
-.form-group input:required:valid {
-  border-left: 4px solid #28a745;
-}
-
-.form-group input:focus:invalid {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-}
-
-.password-requirements {
-  margin-top: 10px;
-  padding: 15px;
-  background: #e9ecef;
-  border-radius: 6px;
+.form-group input:required {
   border-left: 4px solid #00bcd4;
-}
-
-.password-requirements p {
-  margin: 0 0 10px 0;
-  font-weight: bold;
-  color: #495057;
-}
-
-.password-requirements ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.password-requirements li {
-  color: #6c757d;
-  font-size: 0.9rem;
-  margin-bottom: 5px;
 }
 
 .form-actions {
@@ -160,12 +131,18 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .btn-login:hover {
   background: linear-gradient(135deg, #00acc1, #00838f);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+}
+
+.btn-login:active {
+  transform: translateY(0);
 }
 
 .register-link {
@@ -188,10 +165,16 @@
 
 .register-link a:hover {
   text-decoration: underline;
+  color: #00acc1;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .cse-container {
+    margin: 10px;
+    border-width: 4px;
+  }
+  
   .login-wrapper {
     padding: 20px;
   }
@@ -216,6 +199,7 @@
   
   .btn-login {
     width: 100%;
+    max-width: none;
   }
 }
 </style>

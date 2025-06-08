@@ -74,12 +74,12 @@ app.use("/inv", require("./routes/inventoryRoute"))
 app.use("/account", require("./routes/accountRoute"))
 
 
-// 404 Error Handler - must be after all other routes
-app.use((req, res, next) => {
-  const error = new Error(`Page not found: ${req.originalUrl}`)
-  error.status = 404
-  next(error)
-})
+// // 404 Error Handler - must be after all other routes
+// app.use((req, res, next) => {
+//   const error = new Error(`Page not found: ${req.originalUrl}`)
+//   error.status = 404
+//   next(error)
+// })
 
 /* ***********************
  * Global Error Handling Middleware (Task 2)

@@ -1,70 +1,72 @@
+<h1>Welcome to CSE Motors!</h1>
 
-<body>
-  <div class="site-wrapper">
+<%- messages() %>
 
-    
-    <main>
-      <h1>Welcome to CSE Motors!</h1>
-      
-      <%- messages() %>
-
-      <section class="hero">
-        <div class="hero-content">
-          <h2 class="car-name">Camaro</h2>
-          <ul class="car-features">
-            <li>6.2L V8 engine with 455 horsepower</li>
-            <li>0-60 mph in 4 seconds</li>
-            <li>Aggressive, aerodynamic design</li>
-            <li>Available in coupe and convertible models</li>
-            <li>Premium Bose sound system</li>
-          </ul>
-          <a href="#" class="btn-own">Buy Today</a>
-        </div>
-        <img src="/images/vehicles/camaro.jpg" alt="Camaro" class="hero-img">
-      </section>
-      
-      <div class="content-wrapper">
-        <section class="reviews">
-          <h3>Camaro Reviews</h3>
-          <ul>
-            <li>"Pure American muscle with modern flair." (5/5)</li>
-            <li>"Handles like a dream on sharp turns." (4.5/5)</li>
-            <li>"Iconic design, powerful performance." (5/5)</li>
-            <li>"Great value for the power you get." (4/5)</li>
-            <li>"My dream car since high school!" (5/5)</li>
-          </ul>
-        </section>
-        
-        <section class="upgrades">
-          <h2>Camaro Upgrades</h2>
-          <div class="upgrade-grid">
-            <div class="upgrade-item">
-              <div class="upgrade-img-container">
-                <img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor">
-              </div>
-              <a href="#">Flux Capacitor</a>
-            </div>
-            <div class="upgrade-item">
-              <div class="upgrade-img-container">
-                <img src="/images/upgrades/flame.jpg" alt="Flame Decals">
-              </div>
-              <a href="#">Flame Decals</a>
-            </div>
-            <div class="upgrade-item">
-              <div class="upgrade-img-container">
-                <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers">
-              </div>
-              <a href="#">Bumper Stickers</a>
-            </div>
-            <div class="upgrade-item">
-              <div class="upgrade-img-container">
-                <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps">
-              </div>
-              <a href="#">Hub Caps</a>
-            </div>
+<section id="hero">
+  <ul>
+    <li>
+      <h2>DMC Delorean</h2>
+    </li>
+    <li>3 Cup holders</li>
+    <li>Superman doors</li>
+    <li>Fuzzy dice!</li>
+    <li><button id="actionbtn">Own Today</button></li>
+  </ul>
+  <!-- <div class="car-image">
+    <img src="/images/vehicles/delorean.jpg" alt="DMC Delorean">
+  </div> -->
+</section>
+<div class="flex-content">
+  <section id="review">
+    <h2>DMC Delorean Reviews</h2>
+    <ul>
+      <li>"So fast it's almost like traveling in time." (4/5)</li>
+      <li>"Coolest ride on the road." (4/5)</li>
+      <li>"I'm feeling McFly!" (5/5)</li>
+      <li>"The most futuristic ride of our day." (4.5/5)</li>
+      <li>"80's livin and I love it!" (5/5)</li>
+    </ul>
+  </section>
+  <section id="add-ons">
+    <h2>Delorean Upgrades</h2>
+    <div class="flex">
+      <a href="#" title="flux-capacitor">
+        <figure>
+          <div class="add-col">
+            <img src="./images/upgrades/flux-cap.png" alt="Flux-Capacitor">
           </div>
-        </section>
-      </div>
-    </main>
-  </div>
-
+          <figcaption>Flux Capacitor</figcaption>
+        </figure>
+      </a>
+      <a href="#" title="flame decals">
+        <figure>
+          <div class="add-col">
+            <img src="./images/upgrades/flame.jpg" alt="flame decal">
+          </div>
+          <figcaption>Flame Decals</figcaption>
+        </figure>
+      </a>
+    </div>
+    <div class="flex">
+      <a href="#" title="bumper stickers">
+        <figure>
+          <div class="add-col">
+            <img
+              src="./images/upgrades/bumper_sticker.jpg"
+              alt="Bumper Stickers"
+            >
+          </div>
+          <figcaption>Bumper Stickers</figcaption>
+        </figure>
+      </a>
+      <a href="#" title="hub caps">
+        <figure>
+          <div class="add-col">
+            <img src="./images/upgrades/hub-cap.jpg" alt="Hub Caps">
+          </div>
+          <figcaption>Hub Caps</figcaption>
+        </figure>
+      </a>
+    </div>
+  </section>
+</div>

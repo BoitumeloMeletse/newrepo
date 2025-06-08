@@ -149,7 +149,7 @@ invCont.addVehicleByClassificationName = async function (req, res, next) {
   try {
     const data = await invModel.addVehicleByClassificationName(classification_name)
     if (data) {
-      req.flash("notice", `New ${inv_make} vehicle was successfully added.`)
+      req.flash("notice", `New ${inv_make} classification was successfully added.`)
       res.redirect("/inv/")
     } else {
       throw new Error("Error adding a new vehicle")

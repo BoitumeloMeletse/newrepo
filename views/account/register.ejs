@@ -1,14 +1,19 @@
 <div class="cse-container">
   <div class="register-wrapper">
-    <h1 class="page-title"><%= title %></h1>
+    <!-- Display view title -->
+    <% if (title) { %>
+      <h1 class="page-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
     
-    <!-- Flash Messages -->
+    <!-- Display view message -->
     <%- messages() %>
     
     <% if (errors) { %>
       <div class="error-messages">
         <ul>
-          <% errors.forEach(error => { %>
+          <% errors.array().forEach(error => { %>
             <li><%= error.msg %></li>
           <% }) %>
         </ul>
@@ -16,6 +21,8 @@
     <% } %>
     
     <div class="register-form-container">
+      <p class="form-notice">ALL FIELDS ARE REQUIRED.</p>
+      
       <form action="/account/register" method="post" class="register-form">
         <div class="form-group">
           <label for="account_firstname">First Name:</label>
@@ -48,7 +55,7 @@
             id="account_email" 
             name="account_email" 
             required
-            placeholder="Enter your email address"
+            placeholder="Enter a valid email address"
             value="<%= locals.account_email || '' %>"
           >
         </div>
@@ -62,10 +69,11 @@
               name="account_password" 
               required
               placeholder="Enter your password"
-              minlength="12"
+              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+              title="Password must be at least 12 characters and include one capital letter, one number, and one special character."
             >
-            <button type="button" class="password-toggle" onclick="togglePassword()">
-              <span id="toggle-text">Show</span>
+            <button type="button" class="password-toggle" id="pswdBtn">
+              <span id="toggle-text">Show Password</span>
             </button>
           </div>
           <div class="password-requirements">
@@ -74,7 +82,7 @@
               <li>At least 12 characters</li>
               <li>At least 1 capital letter</li>
               <li>At least 1 number</li>
-              <li>At least 1 special character (@$!%*?&)</li>
+              <li>At least 1 special character</li>
             </ul>
           </div>
         </div>
@@ -92,20 +100,22 @@
 </div>
 
 <script>
-function togglePassword() {
-  const passwordInput = document.getElementById('account_password');
-  const toggleText = document.getElementById('toggle-text');
+const pswdBtn = document.getElementById('pswdBtn');
+pswdBtn.addEventListener("click", function(){
+  const pswdInput = document.getElementById("account_password");
+  const toggleText = document.getElementById("toggle-text");
+  const type = pswdInput.getAttribute("type");
   
-  if (passwordInput.type === 'password') {
-    passwordInput.type = 'text';
-    toggleText.textContent = 'Hide';
+  if (type == "password") {
+    pswdInput.setAttribute("type", "text");
+    toggleText.innerHTML = "Hide Password";
   } else {
-    passwordInput.type = 'password';
-    toggleText.textContent = 'Show';
+    pswdInput.setAttribute("type", "password");
+    toggleText.innerHTML = "Show Password";
   }
-}
+});
 
-// Client-side password validation
+// Client-side password validation feedback
 document.getElementById('account_password').addEventListener('input', function(e) {
   const password = e.target.value;
   const requirements = document.querySelectorAll('.password-requirements li');
@@ -132,7 +142,7 @@ document.getElementById('account_password').addEventListener('input', function(e
   }
   
   // Check special character
-  if (/[@$!%*?&]/.test(password)) {
+  if (/[^a-zA-Z0-9]/.test(password)) {
     requirements[3].style.color = 'green';
   } else {
     requirements[3].style.color = '#6c757d';
@@ -142,11 +152,19 @@ document.getElementById('account_password').addEventListener('input', function(e
 
 <style>
 /* CSE Motors Registration Page Styling */
+.cse-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
 .register-wrapper {
   padding: 40px;
   background: white;
   max-width: 600px;
   margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .page-title {
@@ -155,6 +173,16 @@ document.getElementById('account_password').addEventListener('input', function(e
   margin-bottom: 30px;
   text-align: center;
   font-weight: bold;
+}
+
+.form-notice {
+  text-align: center;
+  color: #dc3545;
+  font-weight: bold;
+  margin-bottom: 25px;
+  padding: 10px;
+  background: #f8d7da;
+  border-radius: 5px;
 }
 
 .error-messages {
@@ -206,6 +234,7 @@ document.getElementById('account_password').addEventListener('input', function(e
   font-size: 1rem;
   transition: border-color 0.3s ease;
   background: white;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -226,7 +255,7 @@ document.getElementById('account_password').addEventListener('input', function(e
 
 .password-container input {
   flex: 1;
-  padding-right: 80px;
+  padding-right: 120px;
 }
 
 .password-toggle {
@@ -349,7 +378,7 @@ document.getElementById('account_password').addEventListener('input', function(e
   }
   
   .password-container input {
-    padding-right: 70px;
+    padding-right: 100px;
   }
   
   .password-toggle {

@@ -59,7 +59,7 @@ router.post("/add-vehicle", utilities.handleErrors(invController.addNewInventory
 
 // router.post("/update", classValidate.newInventoryRules(), classValidate.checkUpdateData, invController.updateInventory);
 
-module.exports = router;
+// module.exports = router;
 
 
 
